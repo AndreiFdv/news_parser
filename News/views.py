@@ -10,7 +10,7 @@ def index(request):
 
 
 class IndexView(generic.ListView):
-    template_name = 'news/base.html'
+    template_name = 'news/index.html'
 
     def get_queryset(self):
         pass
