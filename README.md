@@ -35,3 +35,13 @@ $ python manage.py migrate && python manage.py runserver
 ```
 
 If everything is working then that's great, if not then not great. In any case **GLHF**
+
+### PyCharm Settings
+
+Before you commit something, check following settings inside commit window:
+
+1. Reformat code
+2. Optimize imports
+3. Perform code analytics
+
+It will be much easier to understand the code with **these settings enabled**.
