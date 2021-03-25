@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Article(models.Model):
+class article(models.Model):
     CATEGORY = (
         ('politics', 'politics'),
         ('science', 'science'),
@@ -10,6 +10,6 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=60)
     date = models.DateField(auto_now_add=True)
-    article_category = models.CharField(max_length=10,choices=CATEGORY)
+    article_category = models.CharField(max_length=10,choices=CATEGORY,null=True)
     content=models.TextField()
-    source_link=models.TextField(max_length=2000)
+    source_link=models.TextField(max_length=2000,blank=True)

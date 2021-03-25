@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'News.apps.NewsConfig',
     'debug_toolbar',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +126,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 INTERNAL_IPS = [
     '127.0.0.1',
+]
+
+CRONJOBS = [
+    ('*/1 * * * *', 'News.cron.cronjob')
 ]
