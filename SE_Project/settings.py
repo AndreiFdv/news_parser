@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'News.apps.NewsConfig',
     'debug_toolbar',
-    'django_crontab',
 ]
 
 MIDDLEWARE = [
