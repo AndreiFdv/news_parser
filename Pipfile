@@ -9,6 +9,10 @@ django-debug-toolbar = "*"
 python-dotenv = "*"
 isort = "*"
 flake8 = "*"
+requests = "*"
+html2text = "*"
+beautifulsoup4 = "*"
+newspaper3k = "*"
 
 [dev-packages]
 

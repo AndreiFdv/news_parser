@@ -2,13 +2,11 @@ from django.db import models
 
 
 class Article(models.Model):
-    # CATEGORY = (
-    #     ('politics', 'politics'),
-    #     ('science', 'science'),
-    #     ('tech', 'tech'),
-    # )
     title = models.CharField(max_length=60)
-    # date = models.DateField(auto_now_add=True)
-    # article_category = models.CharField(max_length=10, choices=CATEGORY, null=True)
+    date = models.DateTimeField(blank=True)
+    author = models.CharField(max_length=500, blank=True)
     content = models.TextField()
-    source_link = models.TextField(max_length=2000, blank=True)
+    source_link = models.CharField(max_length=2000, blank=True)
+
+    def __str__(self):
+        return self.title
