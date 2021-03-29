@@ -126,3 +126,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+CRONJOBS = [
+    ('*/1 * * * *', 'News.cron.cronjob')
+]
