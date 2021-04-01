@@ -1,16 +1,16 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.views import generic
 
-
-# Create your views here.
-def index(request):
-    html = '<body><h1>MEME</h1></body>'
-    return HttpResponse(html)
+from News.models import Article
 
 
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
+    context_object_name = 'article_list'
 
     def get_queryset(self):
-        pass
+        return Article.objects.all().order_by('date')
+
+
+class DetailView(generic.DetailView):
+    model = Article
+    template_name = 'News/article.html'

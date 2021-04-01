@@ -29,6 +29,10 @@ class Command(BaseCommand):
             article.download()
             article.parse()
 
-            a = Article(title=article.title, content=article.text, date=article.publish_date, author=article.authors,
+            a = Article(title=article.title,
+                        short_text=article.meta_description,
+                        content=article.text,
+                        date=article.publish_date,
+                        author=article.authors,
                         source_link=url)
             a.save()
