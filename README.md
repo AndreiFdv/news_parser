@@ -10,7 +10,7 @@ Clone this repository into your working directory with following command.
 $ git clone https://github.com/AndreiFdv/SE_Project.git
 ```
 
-If you are using **Pipenv** use this command.
+In case you use **Pipenv** type this command.
 
 ```shell
 $ cd SE_Project && pipenv install
@@ -34,7 +34,7 @@ This project will not work without **.env** file, so download this file and put 
 $ python manage.py migrate && python manage.py runserver
 ```
 
-If everything is working then that's great, if not then not great. In any case **GLHF**
+If everything is working then that's great, if not then not great. In any case **Good Luck**
 
 ### PyCharm Settings
 
