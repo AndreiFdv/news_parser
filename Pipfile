@@ -13,6 +13,8 @@ requests = "*"
 html2text = "*"
 beautifulsoup4 = "*"
 newspaper3k = "*"
+feedparser = "*"
+python-dateutil = "*"
 
 [dev-packages]
 
