@@ -1,38 +1,49 @@
-import requests
-from bs4 import BeautifulSoup as bs
 from django.core.management.base import BaseCommand
 from newspaper import Article as NewsArticle
 
 from News.models import Article
+from News.news_sites import *
+
+RSS_Links = [
+    'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+    'http://feeds.foxnews.com/foxnews/world',
+    'https://www.buzzfeed.com/world.xml',
+    'https://www.aljazeera.com/xml/rss/all.xml',
+]
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        url = 'https://www.reuters.com/world'
-        html = requests.get(url)
-        soup = bs(html.content, 'html.parser')
+        reuters = Reuters('https://www.reuters.com/world')
 
-        body = soup.find(class_="column1 col col-10")
+        rss_news = RSSNews(RSS_Links)
 
-        links = body.find_all('a')
+        if reuters.urls:
+            for url in reuters.urls:
+                article = NewsArticle(url)
+                article.download()
+                article.parse()
 
-        reuters = 'https://www.reuters.com'
+                a = Article(title=article.title,
+                            short_text=article.meta_description,
+                            content=article.text,
+                            date=article.publish_date,
+                            author=article.authors,
+                            source_link=url)
+                a.save()
 
-        urls = list()
-        for link in links[:-1:]:
-            urls.append(reuters + link['href'])
+        if rss_news.urls:
+            for url, date in rss_news.urls.items():
+                article = NewsArticle(url)
+                article.download()
+                article.parse()
 
-        urls = list(dict.fromkeys(urls))
+                a = Article(title=article.title,
+                            short_text=article.meta_description,
+                            content=article.text,
+                            date=date,
+                            author=article.authors,
+                            source_link=url)
+                a.save()
 
-        for url in urls:
-            article = NewsArticle(url)
-            article.download()
-            article.parse()
-
-            a = Article(title=article.title,
-                        short_text=article.meta_description,
-                        content=article.text,
-                        date=article.publish_date,
-                        author=article.authors,
-                        source_link=url)
-            a.save()
+        self.stdout.write(self.style.SUCCESS('Success'))
