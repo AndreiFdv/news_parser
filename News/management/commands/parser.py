@@ -4,15 +4,19 @@ from newspaper import Article as NewsArticle
 from News.models import Article
 from News.news_sites import *
 
+RSS_Links = [
+    'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+    'http://feeds.foxnews.com/foxnews/world',
+    'https://www.buzzfeed.com/world.xml',
+    'https://www.aljazeera.com/xml/rss/all.xml',
+]
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         reuters = Reuters('https://www.reuters.com/world')
 
-        nyt = RSSNews('https://rss.nytimes.com/services/xml/rss/nyt/World.xml')
-        fox = RSSNews('http://feeds.foxnews.com/foxnews/world')
-
-        c_dict = {**nyt.urls, **fox.urls}
+        rss_news = RSSNews(RSS_Links)
 
         if reuters.urls:
             for url in reuters.urls:
@@ -28,8 +32,8 @@ class Command(BaseCommand):
                             source_link=url)
                 a.save()
 
-        if c_dict:
-            for url, date in c_dict.items():
+        if rss_news.urls:
+            for url, date in rss_news.urls.items():
                 article = NewsArticle(url)
                 article.download()
                 article.parse()
@@ -41,3 +45,5 @@ class Command(BaseCommand):
                             author=article.authors,
                             source_link=url)
                 a.save()
+
+        self.stdout.write(self.style.SUCCESS('Success'))
