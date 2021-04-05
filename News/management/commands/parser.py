@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from newspaper import Article as NewsArticle
 
-from News.models import Article
 from News.news_sites import *
 
 RSS_Links = [
