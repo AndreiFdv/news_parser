@@ -2,15 +2,53 @@
 {% block content %}
     <div class="row">
         {% for article in article_list %}
-            <div class="card col-md-4">
+            <div class="card col-md-4 ">
                 <img src="https://www.rollingstone.com/wp-content/uploads/2020/07/Screen-Shot-2020-07-15-at-11.24.37-AM.jpg"
                      class="card-img-top" alt="...">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ article.title }}</h5>
                     <p class="card-text">{{ article.short_text }}</p>
-                    <a href="{% url 'News:detail' article.id %}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'News:detail' article.id %}" class="btn btn-primary mt-auto">Go somewhere</a>
                 </div>
             </div>
         {% endfor %}
+        <div class="d-flex justify-content-center">
+            <nav style="margin-top: 1rem">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                    {% endif %}
+
+                    {% if page_obj.number|add:'-4' > 1 %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a></li>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><a class="page-link" href="#">{{ i }}<span
+                                    class="sr-only"></span></a></li>
+                        {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+                    {% endif %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </div>
+
+
+
+
 {% endblock %}
