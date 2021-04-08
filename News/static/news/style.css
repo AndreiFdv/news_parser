@@ -2,6 +2,11 @@ body {
     padding-top: 5rem;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -17,5 +22,5 @@ body {
 }
 
 .container {
-  justify-content: space-evenly ;
-    }
+    justify-content: space-evenly;
+}

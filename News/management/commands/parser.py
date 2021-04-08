@@ -28,7 +28,8 @@ class Command(BaseCommand):
                             content=article.text,
                             date=article.publish_date,
                             author=article.authors,
-                            source_link=url)
+                            source_link=url,
+                            img=article.top_img)
                 a.save()
 
         if rss_news.urls:
@@ -42,7 +43,8 @@ class Command(BaseCommand):
                             content=article.text,
                             date=date,
                             author=article.authors,
-                            source_link=url)
+                            source_link=url,
+                            img=article.top_img)
                 a.save()
 
         self.stdout.write(self.style.SUCCESS('Success'))
