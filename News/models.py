@@ -12,3 +12,15 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('News:detail', args=[self.id])
+
+
+class TelegramUser(models.Model):
+    user_id = models.CharField(max_length=500, unique=True)
+    user_name = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.user_id

@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from newspaper import Article as NewsArticle
 
+from News.management.commands import bot
 from News.news_sites import *
 
 RSS_Links = [
@@ -31,6 +32,7 @@ class Command(BaseCommand):
                             source_link=url,
                             img=article.top_img)
                 a.save()
+                bot.send_message(a)
 
         if rss_news.urls:
             for url, date in rss_news.urls.items():
@@ -46,5 +48,6 @@ class Command(BaseCommand):
                             source_link=url,
                             img=article.top_img)
                 a.save()
+                bot.send_message(a)
 
         self.stdout.write(self.style.SUCCESS('Success'))

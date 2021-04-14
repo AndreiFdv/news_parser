@@ -15,6 +15,7 @@ beautifulsoup4 = "*"
 newspaper3k = "*"
 feedparser = "*"
 python-dateutil = "*"
+python-telegram-bot = "*"
 
 [dev-packages]
 
