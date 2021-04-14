@@ -24,3 +24,13 @@ a {
 .container {
     justify-content: space-evenly;
 }
+
+.card{
+    margin:8px;
+}
+
+.card:hover {
+    transition: 800ms;
+    background-color: #ABCDEF;
+    font-size: 1.1rem;
+}
