@@ -30,7 +30,8 @@ a {
 }
 
 .card:hover {
+    display: flex;
+    flex-grow: 0.1;
     transition: 800ms;
     background-color: #ABCDEF;
-    font-size: 1.05rem;
 }
