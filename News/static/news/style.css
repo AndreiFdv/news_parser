@@ -26,6 +26,10 @@ a {
 }
 
 .card{
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+	display:flex;
     margin:8px;
 }
 
@@ -34,4 +38,15 @@ a {
     flex-grow: 0.1;
     transition: 800ms;
     background-color: #ABCDEF;
+}
+
+
+img {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
 }
