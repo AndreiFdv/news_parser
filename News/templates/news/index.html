@@ -4,7 +4,7 @@
         {% for article in article_list %}
             <div class="card col-md-3 shadow-lg" >
                 <a href="{% url 'News:detail' article.id %}">
-                    <img src="{{ article.img }}" class="card-img-top" alt="" height="300px" width="500px">
+                    <img src="{{ article.img }}" class="card-img-top" alt="" height="55%" width="20%">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.title }}</h5>
                         <p class="card-text">{{ article.short_text }}</p>
