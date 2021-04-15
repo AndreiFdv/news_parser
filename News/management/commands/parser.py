@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 from newspaper import Article as NewsArticle
 
 from News.management.commands import bot
@@ -27,7 +28,7 @@ class Command(BaseCommand):
                 a = Article(title=article.title,
                             short_text=article.meta_description,
                             content=article.text,
-                            date=article.publish_date,
+                            date=timezone.now(),
                             author=article.authors,
                             source_link=url,
                             img=article.top_img)

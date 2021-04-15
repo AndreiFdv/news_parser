@@ -1,3 +1,5 @@
+import re
+
 import feedparser
 import requests
 from bs4 import BeautifulSoup as bs
@@ -14,7 +16,7 @@ class Reuters:
     def __init__(self, url: str):
         html = requests.get(url)
         soup = bs(html.content, "html.parser")
-        self.links = soup.find_all('div', {'class': 'story-content'})
+        self.links = soup.find_all('div', {'class': re.compile(r'StoryCollection__(story|hero).*')})
         self.urls = self.get_urls()
 
     def get_urls(self) -> list:
