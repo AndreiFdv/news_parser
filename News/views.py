@@ -6,7 +6,7 @@ from News.models import Article
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
     context_object_name = 'article_list'
-    paginate_by = 9
+    paginate_by = 12
 
     def get_queryset(self):
         return Article.objects.all().order_by('date')
