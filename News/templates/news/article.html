@@ -3,7 +3,11 @@
     <main class="flex-shrink-0">
         <div class="container">
             <h1 class="mt-1">{{ article.title }}</h1>
-            <p>{{ article.content | linebreaks }}</p>
+            <p>Author: {{ article.author }}</p>
+            <p>{{ article.date }}</p>
+            <div class="article">{{ article.content | linebreaks }}</div>
+            <p>You can find the current article at its original source at <a
+                    href="{{ article.source_link }}">{{ article.source_link }}</a></p>
         </div>
     </main>
 {% endblock %}

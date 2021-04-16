@@ -4,6 +4,7 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup as bs
 from dateutil.parser import parse
+from django.utils import timezone
 
 from News.models import Article
 
@@ -19,13 +20,13 @@ class Reuters:
         self.links = soup.find_all('div', {'class': re.compile(r'StoryCollection__(story|hero).*')})
         self.urls = self.get_urls()
 
-    def get_urls(self) -> list:
-        urls = list()
+    def get_urls(self) -> dict:
+        urls = dict()
         reuters = 'https://www.reuters.com'
         for link in self.links[:5]:
             href = link.a['href']
             if not link_exists(reuters + href):
-                urls.append(reuters + href)
+                urls.update({reuters + href: timezone.now()})
         return urls
 
 
@@ -34,14 +35,15 @@ class RSSNews:
         self.links = links
         self.urls = self.get_urls()
 
-    def get_urls(self):
+    def get_urls(self) -> dict:
         urls = dict()
 
         for link in self.links:
             feed = feedparser.parse(link)
 
             for entry in feed['entries'][:5]:
-                if not link_exists(entry['link']):
-                    urls.update({entry['link']: parse(entry['published'])})
+                e_link = entry['link'] if not feed['feed'].title == 'FOX News' else entry['id']
+                if not link_exists(e_link):
+                    urls.update({e_link: parse(entry['published'])})
 
         return urls
