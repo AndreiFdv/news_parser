@@ -1,10 +1,10 @@
 import os
 
 from django.core.management.base import BaseCommand
-from telegram import Update, Bot
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram import Bot, Update
+from telegram.ext import CallbackContext, CommandHandler, Updater
 
-from News.models import TelegramUser, Article
+from News.models import Article, TelegramUser
 
 
 def start(update: Update, context: CallbackContext) -> None:
