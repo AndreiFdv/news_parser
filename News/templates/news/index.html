@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         {% for article in article_list %}
-            <div class="col-md-3 mb-4 shadow-lg" >
+            <div class="col-md-3 mb-4 shadow" style="padding:0%;margin:2%;">
                 <div class="card h-100">
                     <a href="{% url 'News:detail' article.id %}">
                         <img src="{{ article.img }}" class="card-img-top" alt="">
@@ -23,3 +23,10 @@
         </div>
     </div>
 {% endblock %}
+
+
+
+  <div class="album py-5 bg-light">
+
+
+  </div>
