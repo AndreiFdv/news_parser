@@ -13,6 +13,7 @@ body {
 
 .article p {
     font-size: 1.2rem;
+    text-align: justify;
 }
 
 .container {
