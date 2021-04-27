@@ -14,4 +14,4 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Article
-    template_name = 'News/article.html'
+    template_name = 'news/article.html'

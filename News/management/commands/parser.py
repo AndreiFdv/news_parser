@@ -17,12 +17,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         reuters = Reuters('https://www.reuters.com/world')
 
-        rss_news = RSSNews(RSS_Links)
+        news = RSSNews(RSS_Links)
 
-        news = {**reuters.urls, **rss_news.urls}
+        # news = {**reuters.urls, **rss_news.urls}
+        news.urls.update(reuters.urls)
 
-        if news:
-            for url, date in news.items():
+        if news.urls:
+            for url, date in news.urls.items():
                 article = NewsArticle(url)
                 article.download()
                 article.parse()

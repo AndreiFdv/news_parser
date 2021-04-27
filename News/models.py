@@ -23,4 +23,4 @@ class TelegramUser(models.Model):
     user_name = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.user_id
+        return self.user_name
