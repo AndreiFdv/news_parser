@@ -16,6 +16,7 @@ newspaper3k = "*"
 feedparser = "*"
 python-dateutil = "*"
 python-telegram-bot = "*"
+selenium = "*"
 
 [dev-packages]
 
