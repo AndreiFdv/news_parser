@@ -1,7 +1,5 @@
-import time
-
 from django.core.management import call_command
-from django.test import LiveServerTestCase
+from django.test import Client, LiveServerTestCase
 from selenium import webdriver
 
 
@@ -9,6 +7,7 @@ from selenium import webdriver
 class Main(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
+        self.client = Client()
         call_command('parser')
 
     def tearDown(self):
@@ -21,14 +20,16 @@ class Main(LiveServerTestCase):
 
     def test_logo(self):
         self.browser.get(self.live_server_url)
-        time.sleep(2)
         logo = self.browser.find_element_by_class_name('navbar-brand')
         self.assertIn(logo.text, 'DDD news')
 
     def test_links(self):
         self.browser.get(self.live_server_url)
         links = [x.get_attribute('href') for x in self.browser.find_elements_by_tag_name('a')]
-        self.assertEquals(7, len(links))
+
+        for link in links:
+            response = self.client.get(link)
+            self.assertEquals(response.status_code, 200)
 
     def test_images(self):
         self.browser.get(self.live_server_url)
