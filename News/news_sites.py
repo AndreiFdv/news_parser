@@ -23,7 +23,7 @@ class Reuters:
     def get_urls(self) -> dict:
         urls = dict()
         reuters = 'https://www.reuters.com'
-        for link in self.links[:5]:
+        for link in self.links[:1]:
             href = link.a['href']
             if not link_exists(reuters + href):
                 urls.update({reuters + href: timezone.now()})
@@ -41,7 +41,7 @@ class RSSNews:
         for link in self.links:
             feed = feedparser.parse(link)
 
-            for entry in feed['entries'][:5]:
+            for entry in feed['entries'][:1]:
                 e_link = entry['link'] if not feed['feed'].title == 'FOX News' else entry['id']
                 if not link_exists(e_link):
                     urls.update({e_link: parse(entry['published'])})

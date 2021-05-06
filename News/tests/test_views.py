@@ -16,14 +16,18 @@ class TestViews(TestCase):
         )
         self.detail_url = reverse('News:detail', args=[self.article.id])
 
-    def test_index_GET(self):
+    def test_index_response_status(self):
         response = self.client.get(self.index_url)
-
         self.assertEquals(response.status_code, 200)
+
+    def test_index_template(self):
+        response = self.client.get(self.index_url)
         self.assertTemplateUsed(response, 'news/index.html')
 
-    def test_detail_GET(self):
+    def test_detail_response_status(self):
         response = self.client.get(self.detail_url)
-
         self.assertEquals(response.status_code, 200)
+
+    def test_detail_template(self):
+        response = self.client.get(self.detail_url)
         self.assertTemplateUsed(response, 'news/article.html')
