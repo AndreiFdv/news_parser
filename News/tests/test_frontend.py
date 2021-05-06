@@ -3,7 +3,6 @@ from django.test import Client, LiveServerTestCase
 from selenium import webdriver
 
 
-# Create your tests here.
 class Main(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
@@ -43,7 +42,7 @@ class Main(LiveServerTestCase):
         self.browser.get(self.live_server_url)
         links = [x.get_attribute('href') for x in self.browser.find_elements_by_tag_name('a')]
 
-        for link in links:
-            self.browser.get("127.0.0.1:8000/"+link)
+        for link in links[2:]:
+            self.browser.get(link)
             text = self.browser.find_element_by_class_name('article').text
             self.assertIsNotNone(text)
