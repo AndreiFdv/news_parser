@@ -44,3 +44,14 @@ class Main(LiveServerTestCase):
         for i in range(len(all_links)):
             response = self.browser.get(all_links[i])
             self.assertEquals(response.status_code, 200)
+
+    def test_imgs(self):
+        call_command('parser')
+        self.browser.get(self.live_server_url)
+        all_imgs = []
+        for a in self.browser.find_elements_by_xpath('.//img'):
+            all_imgs.append(a.get_attribute('src'))
+
+        for i in range(len(all_imgs)):
+            img = self.browser.get(all_imgs[i])
+            self.assertIsNotNone(img)
