@@ -1,4 +1,5 @@
 import time
+
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
@@ -6,7 +7,7 @@ from selenium import webdriver
 # Create your tests here.
 class Main(LiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
 
     def tearDown(self):
         self.browser.close()
@@ -14,25 +15,29 @@ class Main(LiveServerTestCase):
     def test_title(self):
         self.browser.get(self.live_server_url)
         title = self.browser.title
-        self.assertEquals(title, 'DDD news')
+        self.assertIn('Ddd News', title.title())
 
     def test_logo(self):
         self.browser.get(self.live_server_url)
+        time.sleep(2)
         logo = self.browser.find_element_by_class_name('navbar-brand')
-        self.assertEquals(logo, 'DDD news')
+        self.assertIn(logo.text, 'DDD news')
 
+    # TODO Message: no such element: Unable to locate element: {"method":"css selector","selector":".nav-link active"}
     def test_navbar_item(self):
         self.browser.get(self.live_server_url)
         navbar_item = self.browser.find_element_by_class_name('nav-link active')
-        self.assertEquals(navbar_item, 'Home')
+        print(navbar_item)
+        time.sleep(500)
+        self.assertEquals(navbar_item.text, 'Home')
 
-    def tes_links(self):
-
+    # TODO Call parser or add item 
+    def test_links(self):
         self.browser.get(self.live_server_url)
         all_links = []
         for a in self.browser.find_elements_by_xpath('.//a'):
             all_links.append(a.get_attribute('href'))
 
         for i in range(len(all_links)):
-          response = self.browser.get(all_links[i])
-          self.assertEquals(response.status_code, 200)
+            response = self.browser.get(all_links[i])
+            self.assertEquals(response.status_code, 200)
