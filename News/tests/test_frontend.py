@@ -2,6 +2,8 @@ import time
 
 from django.test import LiveServerTestCase
 from selenium import webdriver
+from django.core.management import call_command
+
 
 
 # Create your tests here.
@@ -26,13 +28,14 @@ class Main(LiveServerTestCase):
     # TODO Message: no such element: Unable to locate element: {"method":"css selector","selector":".nav-link active"}
     def test_navbar_item(self):
         self.browser.get(self.live_server_url)
-        navbar_item = self.browser.find_element_by_class_name('nav-link active')
+        navbar_item = self.browser.find_element_by_class_name("nav-link active")
         print(navbar_item)
         time.sleep(500)
         self.assertEquals(navbar_item.text, 'Home')
 
     # TODO Call parser or add item 
     def test_links(self):
+        call_command('parser')
         self.browser.get(self.live_server_url)
         all_links = []
         for a in self.browser.find_elements_by_xpath('.//a'):
