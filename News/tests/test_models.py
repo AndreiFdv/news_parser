@@ -26,20 +26,35 @@ class TestModels(TestCase):
     def test_title(self):
         self.assertEquals(self.article.title, 'Test')
 
+    def test_title_type(self):
+        self.assertEquals(type(self.article.title), str)
+
     def test_date(self):
         self.assertEquals(self.article.date, self.datetime)
 
     def test_author(self):
         self.assertEquals(self.article.author, 'Author')
 
+    def test_author_type(self):
+        self.assertEquals(type(self.article.author), str)
+
     def test_content(self):
         self.assertEquals(self.article.content, 'Test Text')
+
+    def test_content_type(self):
+        self.assertEquals(type(self.article.content), str)
 
     def test_short_text(self):
         self.assertEquals(self.article.short_text, 'Short Text')
 
+    def test_short_text_type(self):
+        self.assertEquals(type(self.article.short_text), str)
+
     def test_link(self):
         self.assertEquals(self.article.source_link, 'link')
+
+    def test_link_type(self):
+        self.assertEquals(type(self.article.source_link), str)
 
     def test_img_link(self):
         self.assertEquals(self.article.img, 'img_link')
@@ -47,8 +62,14 @@ class TestModels(TestCase):
     def test_telegram_id(self):
         self.assertEquals(self.telegram_user.user_id, 1337)
 
+    def test_telegram_id_type(self):
+        self.assertEquals(type(self.telegram_user.user_id), int)
+
     def test_telegram_username(self):
         self.assertEquals(self.telegram_user.user_name, 'Test Name')
+
+    def test_telegram_username_type(self):
+        self.assertEquals(type(self.telegram_user.user_name), str)
 
     def test_article_str_return_value(self):
         self.assertEquals(self.article.title, str(self.article))
