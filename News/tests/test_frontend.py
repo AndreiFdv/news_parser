@@ -9,8 +9,7 @@ from django.core.management import call_command
 # Create your tests here.
 class Main(LiveServerTestCase):
     def setUp(self):
-        # self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
 
     def tearDown(self):
         self.browser.close()
