@@ -8,7 +8,6 @@ class Main(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
         self.client = Client()
-        call_command('parser')
 
     def tearDown(self):
         self.browser.close()
@@ -24,6 +23,7 @@ class Main(LiveServerTestCase):
         self.assertIn(logo.text, 'DDD news')
 
     def test_links(self):
+        call_command('parser')
         self.browser.get(self.live_server_url)
         links = [x.get_attribute('href') for x in self.browser.find_elements_by_tag_name('a')]
 
@@ -32,6 +32,7 @@ class Main(LiveServerTestCase):
             self.assertEquals(response.status_code, 200)
 
     def test_images(self):
+        call_command('parser')
         self.browser.get(self.live_server_url)
         images = [x.get_attribute('src') for x in self.browser.find_elements_by_tag_name('img')]
 
