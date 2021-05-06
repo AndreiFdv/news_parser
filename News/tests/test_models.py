@@ -23,17 +23,31 @@ class TestModels(TestCase):
             user_name='Test Name'
         )
 
-    def test_article_fields(self):
+    def test_title(self):
         self.assertEquals(self.article.title, 'Test')
+
+    def test_date(self):
         self.assertEquals(self.article.date, self.datetime)
+
+    def test_author(self):
         self.assertEquals(self.article.author, 'Author')
+
+    def test_content(self):
         self.assertEquals(self.article.content, 'Test Text')
+
+    def test_short_text(self):
         self.assertEquals(self.article.short_text, 'Short Text')
+
+    def test_link(self):
         self.assertEquals(self.article.source_link, 'link')
+
+    def test_img_link(self):
         self.assertEquals(self.article.img, 'img_link')
 
-    def test_telegram_user_fields(self):
+    def test_telegram_id(self):
         self.assertEquals(self.telegram_user.user_id, 1337)
+
+    def test_telegram_username(self):
         self.assertEquals(self.telegram_user.user_name, 'Test Name')
 
     def test_article_str_return_value(self):
