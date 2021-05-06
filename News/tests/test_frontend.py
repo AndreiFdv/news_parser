@@ -9,7 +9,8 @@ from django.core.management import call_command
 # Create your tests here.
 class Main(LiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
+        # self.browser = webdriver.Chrome('C:\\bin\\chromedriver.exe')
+        self.browser = webdriver.Chrome()
 
     def tearDown(self):
         self.browser.close()
@@ -55,3 +56,4 @@ class Main(LiveServerTestCase):
         for i in range(len(all_imgs)):
             img = self.browser.get(all_imgs[i])
             self.assertIsNotNone(img)
+
