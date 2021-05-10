@@ -17,6 +17,7 @@ feedparser = "*"
 python-dateutil = "*"
 python-telegram-bot = "*"
 selenium = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

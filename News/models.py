@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Article(models.Model):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=2000)
     date = models.DateTimeField(blank=True)
     author = models.CharField(max_length=500, blank=True)
     content = models.TextField(blank=True, null=True)
