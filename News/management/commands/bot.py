@@ -1,18 +1,20 @@
+import logging
 import os
 
 from django.core.management.base import BaseCommand
-from telegram import Bot, Update
-from telegram.ext import CallbackContext, CommandHandler, Updater
+from telegram import Bot, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram.ext import (CallbackContext, CommandHandler, ConversationHandler,
+                          Filters, MessageHandler, Updater)
 
 from News.models import Article, TelegramUser
 
+UNSUBSCRIBE, ECHO = range(2)
 
-def start(update: Update, context: CallbackContext) -> None:
-    user_id = update.message.from_user.id
-    user_name = update.message.from_user.name
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+)
 
-    t = TelegramUser(user_id=user_id, user_name=user_name)
-    t.save()
+logger = logging.getLogger(__name__)
 
 
 def send_message(article: Article) -> None:
@@ -26,6 +28,55 @@ def send_message(article: Article) -> None:
         bot.send_message(chat_id=user.user_id, text=message, parse_mode='HTML')
 
 
+def start(update: Update, context: CallbackContext):
+    user_id = update.message.from_user.id
+    user_name = update.message.from_user.name
+
+    obj, created = TelegramUser.objects.get_or_create(
+        user_id=user_id,
+        user_name=user_name
+    )
+
+    reply_keyboard = [['Unsubscribe', 'Help', 'Other']]
+
+    if created:
+        update.message.reply_text(
+            f'{user_name}, you have been successfully subscribed '
+            'Send /cancel to stop talking to me.\n\n',
+            reply_markup=ReplyKeyboardMarkup(
+                reply_keyboard, resize_keyboard=True
+            ),
+        )
+    else:
+        update.message.reply_text(
+            f'{user_name}',
+            reply_markup=ReplyKeyboardMarkup(
+                reply_keyboard, resize_keyboard=True
+            )
+        )
+
+
+def unsubscribe(update: Update, context: CallbackContext) -> int:
+    user = update.message.from_user
+    user_id = user.id
+
+    TelegramUser.objects.filter(user_id=user_id).delete()
+
+    logger.info(f'Message: {update.message.text} from: {user.first_name}')
+    update.message.reply_text(
+        f'{user.first_name}, you have been successfully unsubscribed',
+        reply_markup=ReplyKeyboardRemove()
+    )
+
+    return ConversationHandler.END
+
+
+def echo(update: Update, context: CallbackContext):
+    user = update.message.from_user
+    logger.info(f'User {user.id} send a message: {update.message.text}')
+    update.message.reply_text(update.message.text)
+
+
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
@@ -34,6 +85,13 @@ class Command(BaseCommand):
         dispatcher = updater.dispatcher
 
         dispatcher.add_handler(CommandHandler('start', start))
+        dispatcher.add_handler(MessageHandler(Filters.regex('^unsubscribe'), unsubscribe))
+        dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
 
+        # Start the Bot
         updater.start_polling()
+
+        # Run the bot until you press Ctrl-C or the process receives SIGINT,
+        # SIGTERM or SIGABRT. This should be used most of the time, since
+        # start_polling() is non-blocking and will stop the bot gracefully.
         updater.idle()
