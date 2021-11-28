@@ -1,9 +1,8 @@
 from django.core.management.base import BaseCommand
-from newspaper import Article as NewsArticle
-
 from News.management.commands import bot
 from News.models import Article
 from News.news_sites import Reuters, RSSNews
+from newsplease import NewsPlease
 
 RSS_Links = [
     'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
@@ -21,23 +20,21 @@ class Command(BaseCommand):
 
         # news = {**reuters.urls, **rss_news.urls}
         news.urls.update(reuters.urls)
+        print(reuters.urls)
 
         if news.urls:
             for url, date in news.urls.items():
-                article = NewsArticle(url)
-                article.download()
-                article.parse()
+                article = NewsPlease.from_url(url)
 
                 a = Article()
 
                 a.author = 'Anonymous' if not article.authors else ', '.join(article.authors)
                 a.title = article.title
-                a.short_text = article.meta_description
-                a.content = article.text
+                a.short_text = article.description
+                a.content = article.maintext
                 a.date = date
                 a.source_link = url
-                a.img = article.top_img
-
+                a.img = article.image_url
                 a.save()
                 bot.send_message(a)
 
