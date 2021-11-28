@@ -1,5 +1,6 @@
 {% extends "news/base.html" %}
 {% load static %}
+{% load contact_tags %}
 {% block content %}
     <div class="row">
         {% for article in article_list %}
@@ -20,5 +21,8 @@
                 {% include 'news/paginator_template.html' %}
             </nav>
         </div>
+    </div>
+    <div>
+            {% contact_form %}
     </div>
 {% endblock %}

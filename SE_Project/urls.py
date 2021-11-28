@@ -5,6 +5,7 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('News.urls')),
     path('admin/', admin.site.urls),
+    path('contact/', include("contact.urls")),
 ]
 
 if settings.DEBUG:
