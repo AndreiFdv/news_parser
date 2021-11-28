@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
 
-from News.views import IndexView, DetailView
+from News.views import DetailView, IndexView
 
 
 class TestUrls(SimpleTestCase):
