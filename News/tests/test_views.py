@@ -2,19 +2,19 @@ from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from News.models import Article
+from news.models import Article
 
 
 class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.index_url = reverse('News:index')
+        self.index_url = reverse('news:index')
         self.article = Article.objects.create(
             title='Test',
             date=timezone.now()
         )
-        self.detail_url = reverse('News:detail', args=[self.article.id])
+        self.detail_url = reverse('news:detail', args=[self.article.id])
 
     def test_index_response_status(self):
         response = self.client.get(self.index_url)

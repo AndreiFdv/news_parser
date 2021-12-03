@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand
 from newspaper import Article as NewsArticle
 
-from News.management.commands import bot
-from News.models import Article
-from News.news_sites import Reuters, RSSNews
+from news.management.commands import bot
+from news.models import Article
+from news.news_sites import Reuters, RSSNews
 
 RSS_Links = [
     'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',

@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as bs
 from dateutil.parser import parse
 from django.utils import timezone
 
-from News.models import Article
+from news.models import Article
 
 
 def link_exists(link: str) -> bool:
@@ -42,7 +42,7 @@ class RSSNews:
             feed = feedparser.parse(link)
 
             for entry in feed['entries'][:1]:
-                e_link = entry['link'] if not feed['feed'].title == 'FOX News' else entry['id']
+                e_link = entry['link'] if not feed['feed'].title == 'FOX news' else entry['id']
                 if not link_exists(e_link):
                     urls.update({e_link: parse(entry['published'])})
 
