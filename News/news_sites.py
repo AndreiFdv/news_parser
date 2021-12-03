@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as bs
 from dateutil.parser import parse
 from django.utils import timezone
 
-from News.models import Article
+from news.models import Article
 
 
 def link_exists(link: str) -> bool:

@@ -1,8 +1,8 @@
 from django.urls import path
 
-from News import views
+from news import views
 
-app_name = 'News'
+app_name = 'news'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('article/<int:pk>/', views.DetailView.as_view(), name='detail')

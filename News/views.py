@@ -1,6 +1,6 @@
 from django.views import generic
 
-from News.models import Article
+from news.models import Article
 
 
 class IndexView(generic.ListView):
