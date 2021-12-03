@@ -15,7 +15,7 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('News:detail', args=[self.id])
+        return reverse('news:detail', args=[self.id])
 
 
 class TelegramUser(models.Model):

@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from News.models import Article, TelegramUser
+from news.models import Article, TelegramUser
 
 
 class TestModels(TestCase):
@@ -78,4 +78,4 @@ class TestModels(TestCase):
         self.assertEquals(self.telegram_user.user_name, str(self.telegram_user))
 
     def test_article_get_absolute_url_value(self):
-        self.assertEquals(self.article.get_absolute_url(), reverse('News:detail', args=[self.article.id]))
+        self.assertEquals(self.article.get_absolute_url(), reverse('news:detail', args=[self.article.id]))

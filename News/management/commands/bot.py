@@ -6,7 +6,7 @@ from telegram import Bot, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (CallbackContext, CommandHandler, ConversationHandler,
                           Filters, MessageHandler, Updater)
 
-from News.models import Article, TelegramUser
+from news.models import Article, TelegramUser
 
 UNSUBSCRIBE, ECHO = range(2)
 
@@ -40,19 +40,13 @@ def start(update: Update, context: CallbackContext):
     reply_keyboard = [['Unsubscribe', 'Help', 'Other']]
 
     if created:
+        logger.info(f'{user_id}:{user_name} subscribed')
         update.message.reply_text(
-            f'{user_name}, you have been successfully subscribed '
-            'Send /cancel to stop talking to me.\n\n',
+            f'{user_name}, you have been successfully subscribed'
+            'Send /unsubscribe to stop talking to me.\n\n',
             reply_markup=ReplyKeyboardMarkup(
                 reply_keyboard, resize_keyboard=True
             ),
-        )
-    else:
-        update.message.reply_text(
-            f'{user_name}',
-            reply_markup=ReplyKeyboardMarkup(
-                reply_keyboard, resize_keyboard=True
-            )
         )
 
 
