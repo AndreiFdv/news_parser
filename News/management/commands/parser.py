@@ -22,7 +22,6 @@ class Command(BaseCommand):
 
         # news = {**reuters.urls, **rss_news.urls}
         news.urls.update(reuters.urls)
-        print(reuters.urls)
 
         if news.urls:
             for url, date in news.urls.items():
