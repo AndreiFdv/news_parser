@@ -1,16 +1,16 @@
-# Software engineering project
+# News parser project
 
-I'm too lazy to add something here
+I'm too lazy to add something here.
 
 ## Installation
 
-Clone this repository into your working directory with following command.
+Clone this repository into your working directory with the following command.
 
 ```shell
 $ git clone https://github.com/AndreiFdv/SE_Project.git
 ```
 
-In case you use **Pipenv** type this command.
+In case you use **Pipenv**, type this command.
 
 ```shell
 $ cd SE_Project && pipenv install
@@ -24,7 +24,7 @@ $ virtualenv venv && source venv/bin/activate && cd SE_Project && pip install -r
 
 ### Important
 
-This project will not work without **.env** file, so download this file and put it into project folder.
+This project will not work without the **.env** file, so download it and put it into the project folder.
 
 #### Finally
 
@@ -34,14 +34,12 @@ This project will not work without **.env** file, so download this file and put 
 $ python manage.py migrate && python manage.py runserver
 ```
 
-If everything is working then that's great, if not then not great. In any case **Good Luck**
-
 ### PyCharm Settings
 
-Before you commit something, check following settings inside commit window:
+Before you commit something, check the following settings inside the commit window:
 
 1. Reformat code
 2. Optimize imports
 3. Perform code analytics
 
-It will be much easier to understand the code with **these settings enabled**.
+Understanding the code with **these settings enabled** will be much easier.

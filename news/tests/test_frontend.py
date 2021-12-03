@@ -19,7 +19,7 @@ class Main(LiveServerTestCase):
     def test_logo(self):
         self.browser.get(self.live_server_url)
         logo = self.browser.find_element_by_class_name('navbar-brand')
-        self.assertIn(logo.text, 'DDD news')
+        self.assertIn(logo.text, 'DDD News')
 
     def test_links(self):
         call_command('parser')
