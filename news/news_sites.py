@@ -42,7 +42,7 @@ class RSSNews:
             feed = feedparser.parse(link)
 
             for entry in feed['entries'][:1]:
-                e_link = entry['link'] if not feed['feed'].title == 'FOX news' else entry['id']
+                e_link = entry['link'] if not feed['feed'].title == 'FOX News' else entry['id']
                 if not link_exists(e_link):
                     urls.update({e_link: parse(entry['published'])})
 

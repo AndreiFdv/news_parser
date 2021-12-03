@@ -14,12 +14,12 @@ class Main(LiveServerTestCase):
     def test_title(self):
         self.browser.get(self.live_server_url)
         title = self.browser.title
-        self.assertIn('Ddd news', title.title())
+        self.assertIn('Ddd News', title.title())
 
     def test_logo(self):
         self.browser.get(self.live_server_url)
         logo = self.browser.find_element_by_class_name('navbar-brand')
-        self.assertIn(logo.text, 'DDD news')
+        self.assertIn(logo.text, 'DDD News')
 
     def test_links(self):
         call_command('parser')
