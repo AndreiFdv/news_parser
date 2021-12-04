@@ -7,19 +7,19 @@ I'm too lazy to add something here.
 Clone this repository into your working directory with the following command.
 
 ```shell
-$ git clone https://github.com/AndreiFdv/SE_Project.git
+$ git clone https://github.com/AndreiFdv/news_parser.git
 ```
 
 In case you use **Pipenv**, type this command.
 
 ```shell
-$ cd SE_Project && pipenv install
+$ cd news_parser && pipenv install
 ```
 
 For **virtualenv** use this.
 
 ```shell
-$ virtualenv venv && source venv/bin/activate && cd SE_Project && pip install -r requirements.txt
+$ virtualenv venv && source venv/bin/activate && cd news_parser && pip install -r requirements.txt
 ```
 
 ### Important
