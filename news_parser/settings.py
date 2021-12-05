@@ -24,6 +24,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -31,9 +32,11 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'debug_toolbar',
     'contact',
+    'sorl.thumbnail',
+    'newsletter',
 
 ]
-
+SITE_ID = 1
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -113,8 +116,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS= [ os.path.join(BASE_DIR, 'static'),]
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = os.getenv('MSG_EMAIL')
+EMAIL_HOST_PASSWORD=os.getenv('MSG_PWD')
+EMAIL_USE_TLS = True
+
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+NEWSLETTER_THUMBNAIL = 'sorl-thumbnail'

@@ -6,6 +6,7 @@ urlpatterns = [
     path('', include('news.urls')),
     path('admin/', admin.site.urls),
     path('contact/', include("contact.urls")),
+    path('newsletter/', include('newsletter.urls')),
 ]
 
 if settings.DEBUG:
