@@ -16,12 +16,10 @@ RSS_Links = [
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        reuters = Reuters('https://www.reuters.com/world')
 
         news = RSSNews(RSS_Links)
 
         # news = {**reuters.urls, **rss_news.urls}
-        news.urls.update(reuters.urls)
 
         if news.urls:
             for url, date in news.urls.items():
