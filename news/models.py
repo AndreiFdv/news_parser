@@ -18,6 +18,14 @@ class Article(models.Model):
         return reverse('news:detail', args=[self.id])
 
 
+class TelegraphArticle(models.Model):
+    title = models.CharField(max_length=2000)
+    link = models.CharField(max_length=2000, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
 class TelegramUser(models.Model):
     user_id = models.CharField(max_length=500, unique=True)
     user_name = models.CharField(max_length=500)

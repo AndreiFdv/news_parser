@@ -1,10 +1,13 @@
+import os
+
 from django.core.management.base import BaseCommand
 
 from newsplease import NewsPlease
+from telegraph import Telegraph
 
 from news.management.commands import bot
-from news.models import Article
-from news.news_sites import Reuters, RSSNews
+from news.models import Article, TelegraphArticle
+from news.news_sites import RSSNews
 
 RSS_Links = [
     'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
@@ -18,23 +21,33 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         news = RSSNews(RSS_Links)
-
-        # news = {**reuters.urls, **rss_news.urls}
+        telegraph = Telegraph(access_token=os.getenv('TELEGRAPH_ACCESS_TOKEN'))
 
         if news.urls:
             for url, date in news.urls.items():
                 article = NewsPlease.from_url(url)
 
-                a = Article()
-
-                a.author = 'Anonymous' if not article.authors else ', '.join(article.authors)
-                a.title = article.title
-                a.short_text = article.description
-                a.content = article.maintext
-                a.date = date
-                a.source_link = url
-                a.img = article.image_url
+                a = Article(
+                    author=', '.join(article.authors) or 'Anonymous',
+                    title=article.title,
+                    short_text=article.description,
+                    content=article.maintext,
+                    date=date,
+                    source_link=url,
+                    img=article.image_url
+                )
                 a.save()
-                bot.send_message(a)
+
+                response = telegraph.create_page(
+                    title=a.title,
+                    html_content=a.content
+                )
+
+                TelegraphArticle(
+                    title=a.title,
+                    link=response['url']
+                ).save()
+
+                bot.send_telegraph_msg(response['url'])
 
         self.stdout.write(self.style.SUCCESS('Success'))
