@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 def send_message(article: Article) -> None:
-    users = TelegramUser.objects.all()
+    users = TelegramUser.objects.only("user_id")
     bot = Bot(token=os.getenv('TELEGRAM_BOT'))
     link = 'http://127.0.0.1:8000' + article.get_absolute_url()
 
@@ -26,6 +26,14 @@ def send_message(article: Article) -> None:
         message = f'<b>{article.title}</b>\n{article.short_text} \n<a href="{link}">Read more</a>'
 
         bot.send_message(chat_id=user.user_id, text=message, parse_mode='HTML')
+
+
+def send_telegraph_msg(link: str) -> None:
+    users = TelegramUser.objects.only("user_id")
+    bot = Bot(token=os.getenv('TELEGRAM_BOT'))
+
+    for user in users:
+        bot.send_message(chat_id=user.user_id, text=link)
 
 
 def start(update: Update, context: CallbackContext):
@@ -42,7 +50,7 @@ def start(update: Update, context: CallbackContext):
     if created:
         logger.info(f'{user_id}:{user_name} subscribed')
         update.message.reply_text(
-            f'{user_name}, you have been successfully subscribed'
+            f'{user_name}, you have been successfully subscribed\n'
             'Send /unsubscribe to stop talking to me.\n\n',
             reply_markup=ReplyKeyboardMarkup(
                 reply_keyboard, resize_keyboard=True

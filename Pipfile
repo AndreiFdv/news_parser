@@ -7,8 +7,6 @@ name = "pypi"
 django = "*"
 django-debug-toolbar = "*"
 python-dotenv = "*"
-isort = "*"
-flake8 = "*"
 requests = "*"
 html2text = "*"
 beautifulsoup4 = "*"
@@ -17,9 +15,10 @@ feedparser = "*"
 python-dateutil = "*"
 python-telegram-bot = "*"
 selenium = "*"
-psycopg2 = "*"
 
 [dev-packages]
+isort = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.9"
