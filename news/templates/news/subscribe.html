@@ -1,0 +1,12 @@
+{% extends "news/base.html" %}
+{% block content %}
+
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1> Enter your email here:</h1>
+        <form method="post" name="email">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+</main>
+{% endblock %}

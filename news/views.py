@@ -1,7 +1,6 @@
 from django.views import generic
-
-from news.models import Article
-
+from news.models import Article,Subscriber
+from django.views.generic.edit import FormView,CreateView
 
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
@@ -15,3 +14,14 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Article
     template_name = 'news/article.html'
+
+
+
+class SubscriberView(CreateView):
+    model = Subscriber
+    fields = ['email_address']
+    template_name = 'news/subscribe.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        return super(SubscriberView, self).form_valid(form)
