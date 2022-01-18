@@ -8,8 +8,6 @@ def link_exists(link: str) -> bool:
     return Article.objects.filter(source_link=link).exists()
 
 
-
-
 class RSSNews:
     def __init__(self, links: list):
         self.links = links
