@@ -1,5 +1,6 @@
 from django.contrib import admin
-from news.models import Article, TelegramUser, TelegraphArticle, Subscriber
+
+from news.models import Article, Subscriber, TelegramUser, TelegraphArticle
 
 admin.site.register(Article)
 admin.site.register(TelegramUser)

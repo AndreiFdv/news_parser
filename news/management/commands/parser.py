@@ -1,7 +1,6 @@
 import os
 
 from django.core.management.base import BaseCommand
-
 from newsplease import NewsPlease
 from telegraph import Telegraph
 

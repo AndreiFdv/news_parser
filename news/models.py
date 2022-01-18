@@ -33,7 +33,9 @@ class TelegramUser(models.Model):
     def __str__(self):
         return self.user_name
 
+
 class Subscriber(models.Model):
-    email_address=models.EmailField()
+    email_address = models.EmailField()
+
     def __str__(self):
         return self.email_address

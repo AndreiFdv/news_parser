@@ -1,6 +1,5 @@
 {% extends "news/base.html" %}
 {% load static %}
-{% load contact_tags %}
 {% block content %}
     <div class="row">
         {% for article in article_list %}
@@ -23,6 +22,5 @@
         </div>
     </div>
     <div>
-            {% contact_form %}
     </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.views import generic
-from news.models import Article,Subscriber
-from django.views.generic.edit import FormView,CreateView
+from django.views.generic.edit import CreateView
+
+from news.models import Article, Subscriber
+
 
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
@@ -14,7 +16,6 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Article
     template_name = 'news/article.html'
-
 
 
 class SubscriberView(CreateView):

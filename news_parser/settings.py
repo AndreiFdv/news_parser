@@ -31,8 +31,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'news.apps.NewsConfig',
     'debug_toolbar',
-    'newsletter',
-
 ]
 SITE_ID = 1
 MIDDLEWARE = [
@@ -114,12 +112,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS= [ os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = os.getenv('MSG_EMAIL')
-EMAIL_HOST_PASSWORD=os.getenv('MSG_PWD')
+EMAIL_HOST_PASSWORD = os.getenv('MSG_PWD')
 EMAIL_USE_TLS = True
 
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
@@ -127,4 +125,3 @@ EMAIL_USE_TLS = True
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
-
