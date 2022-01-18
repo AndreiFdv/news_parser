@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "news_parser"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^4.0.1"
+django-debug-toolbar = "^3.2.4"
+python-dotenv = "^0.19.2"
+requests = "^2.27.1"
+html2text = "^2020.1.16"
+beautifulsoup4 = "^4.10.0"
+newspaper3k = "^0.2.8"
+feedparser = "^6.0.8"
+python-dateutil = "^2.8.2"
+python-telegram-bot = "^13.10"
+selenium = "^4.1.0"
+news-please="^1.5.21"
+telegraph = "^2.1.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
